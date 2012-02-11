@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/var/www/blog.robinwinslow.co.uk/wp-content'
+let g:netrw_dirhist_2='/var/www/blog.robinwinslow.co.uk/wp-content/wp-content'
+let g:netrw_dirhist_3='/var/www/blog.robinwinslow.co.uk/wp-content'
+let g:netrw_dirhist_4='/var/www/blog.robinwinslow.co.uk/wp-content/themes'
+let g:netrw_dirhist_5='/var/www/blog.robinwinslow.co.uk/wp-content/themes/rw'
+let g:netrw_dirhist_6='/home/robin'
