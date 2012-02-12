@@ -2,8 +2,6 @@
 # This gets loaded whenever a new shell is instantiated
 ##
 
-# hello world fiddlesticks
-
 # Load in some useful bash functions
 ##
 if [ -f $HOME/.shellconfig/.bash_functions.sh ]; then
