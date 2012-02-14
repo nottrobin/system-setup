@@ -16,10 +16,12 @@ Usage
 - Backup and remove your existing `.bashrc`, `.bash_profile`, `.vim` and `.tmux.conf` files from your home directory
 - fork my repository to your own github - e.g. git@github.com:<username>/.shellconfig.git.
 
-    cd ~
-    git clone git@github.com:<username>/.shellconfig.git
-    cd .shellconfig
-    ./setup.sh # creates symlinks in your home directory
+```
+cd ~
+git clone git@github.com:<username>/.shellconfig.git
+cd .shellconfig
+./setup.sh # creates symlinks in your home directory
+```
 
 That's it.
 
