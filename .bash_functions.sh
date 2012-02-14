@@ -8,15 +8,15 @@
 # usage: # .. <num>
 ##
 function ..() {
-if [ "$1" ]; then
-    COUNTER=0
-    while [ $COUNTER -lt $1 ]; do
+    if [ "$1" ]; then
+        COUNTER=0
+        while [ $COUNTER -lt $1 ]; do
+            cd ..
+            let COUNTER+=1
+        done
+    else
         cd ..
-        let COUNTER+=1
-    done
-else
-    cd ..
-fi
+    fi
 }
 
 # Set some useful variables
