@@ -18,7 +18,7 @@ Usage
 
 ```
 cd ~
-git clone git@github.com:<username>/.shellconfig.git
+git clone git@github.com:{username}/.shellconfig.git
 cd .shellconfig
 ./setup.sh # creates symlinks in your home directory
 ```
