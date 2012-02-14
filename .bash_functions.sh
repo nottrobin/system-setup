@@ -212,6 +212,12 @@ function enable_ssh_auto_login ()
 # SVN helper functions
 # ---
 
+# View diff excluding whitespace and in vim
+##
+function svndiff() {
+    svn diff --diff-cmd diff -x -wu "${@}" | vim - +'set filetype=diff'
+}
+
 # Shortcut to check out a project
 ##
 function svnco() {

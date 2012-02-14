@@ -11,7 +11,11 @@ syntax on
 filetype on
 filetype plugin on
 filetype indent on
+set smarttab
   
+" Enable mouse in console
+set mouse=a
+
 " Highlight search terms...
 set hlsearch
 set incsearch " ...dynamically as they are typed.
@@ -84,4 +88,11 @@ colorscheme desert
 
 " 256 colours
 " set t_Co=256
+
+" When I close a tab, remove the buffer
+set nohidden
+
+"Status line gnarliness
+set laststatus=2
+set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
