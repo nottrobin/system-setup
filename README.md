@@ -2,15 +2,13 @@ Shell config
 ===
 
 This is my shell config, including:
-<<<<<<< HEAD
 
-=======
->>>>>>> a63a6b733f87139524b3c04c01a9375f8ff32013
 - bash functions - a collection of useful functions for setting up my bash shell
 - .bashrc - setup the bash shell, by loading some of the bash functions
 - .vim - my vim setup - including syntax highlighting and other tweaks
 - .tmux.conf - My setup for tmux, the "better than screen" terminal multiplexer
 - .bash_profile - mostly empty. Just makes sure .bashrc gets run.
+- .globalgitconfig - My git configuration.
 
 Usage
 ---
