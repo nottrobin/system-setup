@@ -1,0 +1,6 @@
+[user]
+	name = Robin Winslow
+	email = robin@robinwinslow.co.uk
+[http]
+    sslVerify = no
+
