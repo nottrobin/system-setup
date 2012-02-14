@@ -13,7 +13,7 @@ This is my shell config, including:
 Usage
 ---
 
-**NB:** First backup and remove your existing `.bashrc`, `.bash_profile`, `.vim` and `.tmux.conf` files from your home directory.
+**NB:** First backup and remove your existing `.bashrc`, `.bash_profile`, `.vim/`, `.gitconfig` and `.tmux.conf` files from your home directory.
 
 ```
 cd ~
