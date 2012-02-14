@@ -22,7 +22,7 @@ cd .shellconfig
 ./setup.sh # creates symlinks in your home directory
 ```
 
-If you get an error trying to clone, you it might be a certificate problem. See:
+If you get an error trying to clone, it might be a certificate problem. See:
 http://stackoverflow.com/questions/3777075/https-github-access/4454754#comment-11700318
 
 My global config contains a fix to this, using `http.sslVerify=no` in the global git config.
