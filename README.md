@@ -13,15 +13,17 @@ This is my shell config, including:
 Usage
 ---
 
-- Backup and remove your existing `.bashrc`, `.bash_profile`, `.vim` and `.tmux.conf` files from your home directory
-- fork my repository to your own github - e.g. `git@github.com:{username}/.shellconfig.git`.
+**NB:** First backup and remove your existing `.bashrc`, `.bash_profile`, `.vim` and `.tmux.conf` files from your home directory.
 
 ```
 cd ~
-git clone git@github.com:{username}/.shellconfig.git
+git clone git@github.com:nottrobin/.shellconfig.git
 cd .shellconfig
 ./setup.sh # creates symlinks in your home directory
 ```
 
-That's it.
+If you get an error trying to clone, you it might be a certificate problem. See:
+http://stackoverflow.com/questions/3777075/https-github-access/4454754#comment-11700318
+
+My global config contains a fix to this, using `http.sslVerify=no` in the global git config.
 
