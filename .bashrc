@@ -4,11 +4,7 @@
 
 # Load in some useful bash functions
 ##
-if [ -f $HOME/.shellconfig/.bash_functions.sh ]; then
-    . $HOME/.shellconfig/.bash_functions.sh
-elif [ -f $HOME/.bash_functions.sh ]; then
-    . $HOME/.bash_functions.sh
-fi
+$HOME/.bash_functions.sh;
 
 # Run some bash functions
 ##

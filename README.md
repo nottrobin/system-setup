@@ -13,13 +13,17 @@ This is my shell config, including:
 Usage
 ---
 
-**NB:** First backup and remove your existing `.bashrc`, `.bash_profile`, `.vim/`, `.gitconfig` and `.tmux.conf` files from your home directory.
-
+To install:
 ```
-cd ~
 git clone git@github.com:nottrobin/.shellconfig.git
-cd .shellconfig
-./setup.sh # creates symlinks in your home directory
+.shellconfig/install.sh # creates symlinks in your home directory
+```
+
+Your existing files will be backed up in .shellconfig/replaced
+
+To uninstall - and move your original files back into your home directory:
+```
+.shellconfig/uninstall.sh
 ```
 
 If you get an error trying to clone, it might be a certificate problem. See:
