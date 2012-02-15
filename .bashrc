@@ -4,7 +4,7 @@
 
 # Load in some useful bash functions
 ##
-$HOME/.bash_functions.sh;
+source $HOME/.bash_functions.sh;
 
 # Run some bash functions
 ##
