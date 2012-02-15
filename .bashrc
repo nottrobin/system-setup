@@ -6,6 +6,14 @@
 ##
 source $HOME/.bash_functions.sh;
 
+# OS Specific setup
+##
+issue=`cat /etc/issue`;
+# Ubuntu
+[[ $issue =~ 'Ubuntu' ]] && ubuntu_setup;
+# Lubuntu
+[[ $issue =~ 'Lubuntu' ]] && lubuntu_setup;
+
 # Run some bash functions
 ##
 source_global_bashrc        # Import global settings
@@ -15,13 +23,11 @@ set_path                    # Add my custom locations to $PATH
 set_svn_path                # Add the SVNPATH
 set_aliases                 # Add custom aliases
 set_terminal_prompt_colours # Setup prompt colours
+enable_ssh_auto_login       # Enable ssh autologin
 
-# These are within IF blocks so they only run when there is a terminal
-if [[ $TERM == 'screen' ]]; then
-    # Only if we're already in tmux
-    enable_ssh_auto_login   # Make it so autologin so other terminals will work
-elif [[ $TERM == 'xterm' ]]; then
-    # Otherwise load tmux (if we have a terminal)
-    load_tmux_session 'rw-default' # Open a screen session
-fi
+# If we have the expected default 'xterm' terminal
+# load tmux
+# We're not doing this for every terminal
+# to keep the shell clean for headless calls
+[[ $TERM == 'xterm' ]] && load_tmux_session 'rw-default'
 
