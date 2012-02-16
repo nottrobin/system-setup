@@ -1,6 +1,9 @@
 Shell config
 ===
 
+What is it?
+---
+
 This is my shell config, including:
 
 - .bash_functions.sh - a collection of useful functions for setting up my bash shell
