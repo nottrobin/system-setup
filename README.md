@@ -30,7 +30,7 @@ To uninstall - and move your original files back into your home directory:
 
 If you get an error trying to clone:
 
-- Make sure you're using the read-only URL: git://github.com/nottrobin/.shellconfig.git
+- Make sure you're using the read-only URL: `git://github.com/nottrobin/.shellconfig.git`.
 - You might be getting a [certificate problem](http://stackoverflow.com/questions/3777075/https-github-access/4454754#comment-11700318). Try `env GIT_SSL_NO_VERIFY=true`.
 
 Once you've installed my config, the global git config contains a fix to the certificate problem, using `http.sslVerify=no` in the global git config.
