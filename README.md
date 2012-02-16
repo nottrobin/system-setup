@@ -14,6 +14,7 @@ Usage
 ---
 
 To install:
+
 ```
 git clone git@github.com:nottrobin/.shellconfig.git
 .shellconfig/install.sh # creates symlinks in your home directory
@@ -22,6 +23,7 @@ git clone git@github.com:nottrobin/.shellconfig.git
 Your existing files will be backed up in .shellconfig/replaced
 
 To uninstall - and move your original files back into your home directory:
+
 ```
 .shellconfig/uninstall.sh
 ```
