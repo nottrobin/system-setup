@@ -3,7 +3,7 @@ Shell config
 
 This is my shell config, including:
 
-- bash functions - a collection of useful functions for setting up my bash shell
+- .bash_functions.sh - a collection of useful functions for setting up my bash shell
 - .bashrc - setup the bash shell, by loading some of the bash functions
 - .vim - my vim setup - including syntax highlighting and other tweaks
 - .tmux.conf - My setup for tmux, the "better than screen" terminal multiplexer
