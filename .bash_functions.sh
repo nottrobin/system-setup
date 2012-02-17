@@ -214,7 +214,7 @@ function remotediff()
 function enable_ssh_auto_login ()
 {
     if [ -z "$SSH_AUTH_SOCK" ] ; then
-        eval `ssh-agent -s`
+        eval `ssh-agent -s` >/dev/null 2>&1
         ssh-add 2>/dev/null
     fi
 }
