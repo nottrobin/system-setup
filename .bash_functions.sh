@@ -100,7 +100,8 @@ function set_aliases ()
     alias rcc='rm -rf log/ cache/' # Effectively clear cache	
     alias sfix='rm -rf log/ cache/ ; mkdir log cache ; ./symfony fix-perms' # Effectively, ./symfony fix
     alias svnexternals='svn pe svn:externals .'
-    alias sst="svn st --ignore-externals"
+    alias ssti="svn st --ignore-externals"
+    alias sstc="svn st | egrep -v '^($|X |Performing)'"
 
 	# PRM aliases
 	alias prmqa='prm inspire-qa'
@@ -213,6 +214,9 @@ function remotediff()
 #
 function enable_ssh_auto_login ()
 {
+    # Remove any existing instances of ssh agent
+    ps -ef | egrep `whoami`'.*ssh-agent' | grep -v grep | sed 's/[^0-9]*\([0-9][0-9][0-9][0-9][0-9]*\).*/\1/g' | xargs kill
+
     if [ -z "$SSH_AUTH_SOCK" ] ; then
         eval `ssh-agent -s` >/dev/null 2>&1
         ssh-add 2>/dev/null
