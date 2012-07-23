@@ -27,7 +27,7 @@ function set_vars ()
     pd=/nfs/personaldev/rwmorris
     svn=svn://subversion/symfony
     web=/var/www
-	me="robin@vps.robinwinslow.co.uk"
+    me="robin@vps.robinwinslow.co.uk"
 
     # Set variables for bash colours
     define_bash_colors
@@ -91,7 +91,7 @@ function set_aliases ()
     alias clearmemcache="/export/home/msquire/bin/clearmemcache" # Clear memacache
     alias ks='kill -SIGWINCH $$'; # Fix weird terminal display issues
     alias unlock='sudo mach -dr ipc-redhat-5-buildroot-0 -f unlock'; # Unlock root for RPM builds
-	alias distro='cat `ls /etc/*_ver* /etc/*-rel*`'; # Print out the name of the current distribution
+    alias distro='cat `ls /etc/*_ver* /etc/*-rel*`'; # Print out the name of the current distribution
 
     # Symfony related aliases
     alias svnls='svn ls svn://subversion/symfony'
@@ -102,16 +102,17 @@ function set_aliases ()
     alias svnexternals='svn pe svn:externals .'
     alias ssti="svn st --ignore-externals"
     alias sstc="svn st | egrep -v '^($|X |Performing)'"
+    alias unixtime="date +%s"
 
-	# PRM aliases
-	alias prmqa='prm inspire-qa'
-	alias prmdev='prm inspire-dev'
-	alias prmlive='prm inspire-live'
-	alias prmstage='prm inspire-stage'
-	alias prmdevbatch='prm digital-dev-batch'
-	alias prmqabatch='prm digital-qa-batch'
-	alias prmstagebatch='prm digital-stage-batch'
-	alias prmbatch='prm digital-live-batch'
+    # PRM aliases
+    alias prmqa='prm inspire-qa'
+    alias prmdev='prm inspire-dev'
+    alias prmlive='prm inspire-live'
+    alias prmstage='prm inspire-stage'
+    alias prmdevbatch='prm digital-dev-batch'
+    alias prmqabatch='prm digital-qa-batch'
+    alias prmstagebatch='prm digital-stage-batch'
+    alias prmbatch='prm digital-live-batch'
 
     # Go to my server
     alias sshme='ssh robin@robinwinslow.co.uk'
@@ -180,12 +181,42 @@ function set_umask()
     umask 002
 }
 
+# Make it so ssh keys don't prompt for passphrase
+#
+function enable_ssh_auto_login ()
+{
+    if [ -z "$TMUX" ]; then # we're not in a tmux session
+        if [ ! -z "$SSH_TTY" ]; then # We logged in via SSH
+            # if ssh auth variable is missing
+            if [ -z "$SSH_AUTH_SOCK" ]; then
+                export SSH_AUTH_SOCK="$HOME/.ssh/.auth_socket"
+            fi
+
+            # create the new auth session
+            if [ ! -S "$SSH_AUTH_SOCK" ]; then
+                `ssh-agent -a $SSH_AUTH_SOCK` > /dev/null 2>&1
+                echo $SSH_AGENT_PID > $HOME/.ssh/.auth_pid
+            fi
+
+            if [ -z $SSH_AGENT_PID ]; then
+                export SSH_AGENT_PID=`cat $HOME/.ssh/.auth_pid`
+            fi
+
+            # Add all default keys to ssh auth
+            ssh-add 2>/dev/null
+        fi
+    fi
+}
+
 # Load a tmux session, if one doesn't exist
 ##
 function load_tmux_session()
 {
-    if [[ $TERM != 'screen' ]]; then
-        tmux attach;
+    # to keep the shell clean for headless calls
+    if [ -z "$TMUX" ] && [[ $TERM != 'screen' ]]; then # we're not in a tmux session
+        if [ ! -z "$SSH_TTY" ]; then # We logged in via SSH
+            tmux attach;
+        fi
     fi
 }
 
@@ -210,19 +241,6 @@ function remotediff()
     ssh $2 cat $remotefile | diff $1 -;
 }
 
-# Make it so ssh keys don't prompt for passphrase
-#
-function enable_ssh_auto_login ()
-{
-    # Remove any existing instances of ssh agent
-    ps -ef | egrep `whoami`'.*ssh-agent' | grep -v grep | sed 's/[^0-9]*\([0-9][0-9][0-9][0-9][0-9]*\).*/\1/g' | xargs kill
-
-    if [ -z "$SSH_AUTH_SOCK" ] ; then
-        eval `ssh-agent -s` >/dev/null 2>&1
-        ssh-add 2>/dev/null
-    fi
-}
-
 # SVN helper functions
 # ---
 
@@ -235,19 +253,19 @@ function svndiff() {
 # Shortcut to check out a project
 ##
 function svnco() {
-svn co svn://subversion/symfony/$1 $2
-cd $2
-sfstart
+    svn co svn://subversion/symfony/$1 $2
+    cd $2
+    sfstart
 }
 
 # Shortcut to view a log
 ##
 function svnlog() {
-if [ "$2" ]; then
-    svn log $SVNPATH$1 -v --limit=$2
-else
-    svn log $SVNPATH$1 -v
-fi
+    if [ "$2" ]; then
+        svn log $SVNPATH$1 -v --limit=$2
+    else
+        svn log $SVNPATH$1 -v
+    fi
 }
 
 # Shortcut to clear symfony cache
@@ -273,17 +291,17 @@ fi
 # Shortcut to clear only symfony template cache
 ##
 function sctc() {
-cachedir1=cache/*/prod/template
-cachedir2=cache/*/dev/template
-if [ -d $cachedir1 ]; then
-    echo "Removing prod template cache..."
-    rm -rf $cachedir1
-fi
-if [ -d $cachedir2 ]; then
-    echo "Removing dev template cache..."
-    rm -rf $cachedir2
-fi
-echo "Done."
+    cachedir1=cache/*/prod/template
+    cachedir2=cache/*/dev/template
+    if [ -d $cachedir1 ]; then
+        echo "Removing prod template cache..."
+        rm -rf $cachedir1
+    fi
+    if [ -d $cachedir2 ]; then
+        echo "Removing dev template cache..."
+        rm -rf $cachedir2
+    fi
+    echo "Done."
 }
 
 # ====
@@ -335,12 +353,12 @@ function ubuntu_setup() {
 
     if [ -n "$force_color_prompt" ]; then
         if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
+            # We have color support; assume it's compliant with Ecma-48
+            # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+            # a case would tend to support setf rather than setaf.)
+            color_prompt=yes
         else
-        color_prompt=
+            color_prompt=
         fi
     fi
 
@@ -353,10 +371,10 @@ function ubuntu_setup() {
 
     # If this is an xterm set the title to user@host:dir
     case "$TERM" in
-    xterm*|rxvt*)
+        xterm*|rxvt*)
         PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
         ;;
-    *)
+        *)
         ;;
     esac
 
