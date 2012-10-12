@@ -3,4 +3,5 @@
 	email = robin@robinwinslow.co.uk
 [http]
     sslVerify = no
-
+[core]
+    autocrlf = true
