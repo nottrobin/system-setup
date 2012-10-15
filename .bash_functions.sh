@@ -171,7 +171,7 @@ function set_terminal_prompt_colours ()
 ##
 function set_path ()
 {
-    PATH=$PATH:/usr/sbin:$HOME/bin:/usr/local/bin:/usr/local/sbin; export PATH
+    PATH=~/bin:$PATH:/usr/sbin:$HOME/bin:/usr/local/bin:/usr/local/sbin; export PATH
 }
 
 # Set the default permissions for created directories and files

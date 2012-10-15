@@ -34,20 +34,25 @@ uninstallfile()
     fi
 
     # Remove existing file
-    if [ -L $installname ]; then
+    link=`readlink -f $installname`;
+    if [ "${link#*$projectdir}" != "$link" ]; then
         rm $installname && echo " - Removed link $installname";
         [ -e $backupname ] && mv $backupname $installname && echo " - Replaced original $installname";
+    	return 0; # Uninstalled
+    else
+        return 1; # Didn't uninstall
     fi
+
 }
 
 # Setup normal files
 for filename in '.bashrc' '.bash_profile' '.bash_functions.sh' '.tmux.conf' '.vim'; do
-    uninstallfile $filename && echo "Uninstalled $filename";
+    uninstallfile $filename && echo " - == Uninstalled $filename";
 done
 
 # Setup global git config (needs special name)
-uninstallfile '.globalgitconfig' '.gitconfig' && echo "Uninstalled .gitconfig";
+uninstallfile '.globalgitconfig' '.gitconfig' && echo " - == Uninstalled .gitconfig";
 
 # Try to remove backup directory (should now be empty)
-rmdir $backupdir && echo "+ Removed backup directory";
+[ -e $backupdir ] && rmdir $backupdir && echo " - Removed backup directory";
 

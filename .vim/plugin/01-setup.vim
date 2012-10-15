@@ -81,6 +81,6 @@ colorscheme desert
 let g:debuggerPort = 9001
 let g:debuggerTimeout = 20
 
-" Turn off mouse visual mode
+" Disable automatic visual
 set mouse-=a
 
