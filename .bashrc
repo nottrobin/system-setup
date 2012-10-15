@@ -23,11 +23,6 @@ set_path                    # Add my custom locations to $PATH
 set_svn_path                # Add the SVNPATH
 set_aliases                 # Add custom aliases
 set_terminal_prompt_colours # Setup prompt colours
-enable_ssh_auto_login       # Enable ssh autologin
-
-# If we have the expected default 'xterm' terminal
-# load tmux
-# We're not doing this for every terminal
-# to keep the shell clean for headless calls
-[[ $TERM == 'xterm' ]] && load_tmux_session 'rw-default'
+enable_ssh_auto_login       # Load ssh-agent for SSH logins
+load_tmux_session           # start tmux
 
