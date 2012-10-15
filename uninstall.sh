@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# Check for dependencies
+command -v readlink >/dev/null 2>&1 || {
+    echo >&2 "readlink is required for install.";
+    echo >&2 "Manually remove symlinks to the config files no longer want and restore original files from the backups directory.";
+    echo >&2 "Exiting.";
+    exit 1;
+}
+
 backupdir='replaced';
 
 # Find home directory
@@ -24,7 +32,7 @@ uninstallfile()
     else
         installname=$installdir/$1
     fi
-    
+
     # Remove existing file
     if [ -L $installname ]; then
         rm $installname && echo " - Removed link $installname";

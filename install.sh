@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# Check for dependencies
+command -v readlink >/dev/null 2>&1 || {
+    echo >&2 "readlink is required for install.";
+    echo >&2 "Consider manually adding symlinks to the config files you want.";
+    echo >&2 "Exiting.";
+    exit 1;
+}
+
 backupdir='replaced';
 
 # Find home directory
