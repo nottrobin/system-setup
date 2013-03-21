@@ -39,6 +39,8 @@ uninstallfile()
         rm $installname && echo " - Removed link $installname";
         [ -e $backupname ] && mv $backupname $installname && echo " - Replaced original $installname";
     	return 0; # Uninstalled
+    elif [ -e $installname ] && grep "#nottrobin-shellconfig" .bashrc > /dev/null 2>&1; then
+        sed -i '/#nottrobin-shellconfig/d' $installname && echo " - Removed source line from $installname";
     else
         return 1; # Didn't uninstall
     fi
@@ -46,9 +48,10 @@ uninstallfile()
 }
 
 # Setup normal files
-for filename in '.bashrc' '.bash_profile' '.bash_functions.sh' '.tmux.conf' '.vim'; do
+for filename in '.bashrc' '.bash_profile' '.tmux.conf' '.vim'; do
     uninstallfile $filename && echo " - == Uninstalled $filename";
 done
+
 
 # Setup global git config (needs special name)
 uninstallfile '.globalgitconfig' '.gitconfig' && echo " - == Uninstalled .gitconfig";
