@@ -15,5 +15,5 @@ set_svn_path                # Add the SVNPATH
 set_aliases                 # Add custom aliases
 set_terminal_prompt_colours # Setup prompt colours
 enable_ssh_auto_login       # Load ssh-agent for SSH logins
-#load_tmux_session           # start tmux
+load_tmux_session           # start tmux
 
