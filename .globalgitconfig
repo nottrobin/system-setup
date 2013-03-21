@@ -4,4 +4,15 @@
 [http]
     sslVerify = no
 [core]
-    autocrlf = true
+	autocrlf = false
+[alias]
+    s = status -sb
+    subtree = subtree.sh
+    cloner = clone --recursive
+    graph = log --all --graph --decorate --oneline -n30
+    lsdir = ls-files --exclude-standard -x \"*\"
+    mergenc = merge --no-ff --no-commit
+    conflicts = diff --name-only --diff-filter=U
+[color]
+	ui = true
+
