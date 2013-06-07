@@ -1,10 +1,10 @@
 [user]
-	name = Robin Winslow
-	email = robin@robinwinslow.co.uk
+    name = Robin Winslow
+    email = robin@robinwinslow.co.uk
 [http]
     sslVerify = no
 [core]
-	autocrlf = false
+    autocrlf = false
 [alias]
     s = status -sb
     subtree = subtree.sh
@@ -13,8 +13,10 @@
     lsdir = ls-files --exclude-standard -x \"*\"
     mergenc = merge --no-ff --no-commit
     conflicts = diff --name-only --diff-filter=U
+    co = checkout
+    gh-create = "!sh -c 'curl -u \"nottrobin\" https://api.github.com/user/repos -d \"{\\\"name\\\":\\\"$1\\\"}\" && git remote add origin git@github.com:nottrobin/$1.git' -"
 [color]
-	ui = true
+    ui = true
 
 [push]
-	default = current
+    default = current
