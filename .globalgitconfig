@@ -14,7 +14,6 @@
     mergenc = merge --no-ff --no-commit
     conflicts = diff --name-only --diff-filter=U
 [color]
-	ui = true
-
+    ui = true
 [push]
     default = current
