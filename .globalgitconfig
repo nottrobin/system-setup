@@ -1,10 +1,10 @@
 [user]
-	name = Robin Winslow
-	email = robin@robinwinslow.co.uk
+    name = Robin Winslow
+    email = robin@robinwinslow.co.uk
 [http]
     sslVerify = no
 [core]
-	autocrlf = false
+    autocrlf = false
 [alias]
     s = status -sb
     subtree = subtree.sh
@@ -14,6 +14,7 @@
     mergenc = merge --no-ff --no-commit
     conflicts = diff --name-only --diff-filter=U
     publish = !sh -c \"git mv $1 \\`echo \\\"$1\\\" | sed \\\"s/^_posts[/]\\(.*\\)/_posts\\/\\\"`date +%Y-%m-%d`\\\"-\\1/\\\"\\`\" -
+    co = checkout
 [color]
     ui = true
 [push]

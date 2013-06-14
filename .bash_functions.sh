@@ -132,27 +132,7 @@ function set_terminal_prompt_colours ()
     environment_color=$h_green
     path_color=$h_blue
     command_color=$white
-
-    # Environment specific colour setup
-    if [[ ${REALNAME:-''} == *stage* ]] || [[ ${REALNAME:-''} == *jump* ]]; then
-        environment_color=$h_yellow
-    fi
-
-    if [[ ${REALNAME:-''} == *live* ]]; then
-        environment_color=$h_red
-    fi
-
-    if [[ ${HOSTNAME:-''} == 'vps.robinwinslow.co.uk' ]]; then
-        environment_color=$h_magenta
-
-        REALNAME='robinwinslow.co.uk'
-    fi
-
-    if [[ ${HOSTNAME:-''} == 'robin-desktop' ]]; then
-        environment_color=$h_blue;
-        path_color=$h_magenta;
-        REALNAME='h0m£';
-    fi
+    branch_color=$green
 
     # Wherever we are, root is red
     [[ `whoami` == 'root' ]] && environment_color=$h_red;
@@ -164,7 +144,7 @@ function set_terminal_prompt_colours ()
     # $REALNAME = environment name (e.g. inspire-qa-web-01)
     # \W = working directory
 
-    export PS1="$delimiter_color[$environment_color\u@\h|$REALNAME$delimiter_color:$path_color\W$delimiter_color] # $command_color"
+    PS1="$delimiter_color[$environment_color\u@\h$delimiter_color:$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] # $command_color"
 }
 
 # Add some useful locations to the $PATH
