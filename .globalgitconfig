@@ -13,6 +13,7 @@
     lsdir = ls-files --exclude-standard -x \"*\"
     mergenc = merge --no-ff --no-commit
     conflicts = diff --name-only --diff-filter=U
+    publish = !sh -c \"git mv $1 \\`echo \\\"$1\\\" | sed \\\"s/^_posts[/]\\(.*\\)/_posts\\/\\\"`date +%Y-%m-%d`\\\"-\\1/\\\"\\`\" -
 [color]
     ui = true
 [push]
