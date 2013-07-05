@@ -13,10 +13,9 @@
     lsdir = ls-files --exclude-standard -x \"*\"
     mergenc = merge --no-ff --no-commit
     conflicts = diff --name-only --diff-filter=U
+    publish = !sh -c \"git add $1 && git mv $1 \\`echo \\\"$1\\\" | sed \\\"s/^_posts[/]\\(.*\\)/_posts\\/\\\"`date +%Y-%m-%d`\\\"-\\1/\\\"\\`\" -
     co = checkout
-    gh-create = "!sh -c 'curl -u \"nottrobin\" https://api.github.com/user/repos -d \"{\\\"name\\\":\\\"$1\\\"}\" && git remote add origin git@github.com:nottrobin/$1.git' -"
 [color]
     ui = true
-
 [push]
     default = current
