@@ -120,6 +120,9 @@ function set_aliases ()
     # Server aliases
     alias rw='sudo /etc/init.d/rw'
     alias nrw='sudo /etc/init.d/noderw'
+
+    # Git alises
+    alias up='git push && git push heroku'
 }
 
 # Terminal prompt colours
