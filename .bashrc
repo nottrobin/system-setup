@@ -16,4 +16,4 @@ set_aliases                 # Add custom aliases
 set_terminal_prompt_colours # Setup prompt colours
 enable_ssh_auto_login       # Load ssh-agent for SSH logins
 load_tmux_session           # start tmux
-
+hub_alias                   # If "hub" is installed, alias it to "git"
