@@ -125,9 +125,9 @@ function set_aliases ()
     alias up='git push && git push heroku'
 }
 
-# Terminal prompt colours
+# Prompt colours
 ##
-function set_terminal_prompt_colours ()
+function prompt_colours ()
 {
     define_bash_colors # Import easy color variable names
 
@@ -139,6 +139,29 @@ function set_terminal_prompt_colours ()
 
     # Wherever we are, root is red
     [[ `whoami` == 'root' ]] && environment_color=$h_red;
+}
+
+# Make the prompt shorter
+##
+function prompt_short ()
+{
+    prompt_colours # Get prompt colour choices
+
+    # The following string defines what is displayed on the terminal prompt
+    # Colours variables will set the colour for all characters after that point until a new colour is specified
+    # \u = username (e.g. rwmorris)
+    # \h = hostname (e.g. bfb1-086)
+    # $REALNAME = environment name (e.g. inspire-qa-web-01)
+    # \W = working directory
+
+    PS1="$delimiter_color[$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] # $command_color"
+}
+
+# Terminal prompt colours
+##
+function prompt_standard ()
+{
+    prompt_colours # Get prompt colour choices
 
     # The following string defines what is displayed on the terminal prompt
     # Colours variables will set the colour for all characters after that point until a new colour is specified
