@@ -252,6 +252,11 @@ function remotediff()
     ssh $2 cat $remotefile | diff $1 -;
 }
 
+function pyserver()
+{
+    python -m SimpleHTTPServer 4321
+}
+
 # SVN helper functions
 # ---
 
