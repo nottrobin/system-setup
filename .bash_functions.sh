@@ -219,10 +219,8 @@ function enable_ssh_auto_login ()
 function load_tmux_session()
 {
     # to keep the shell clean for headless calls
-    if [ -z "$TMUX" ] && [[ $TERM != 'screen' ]]; then # we're not in a tmux session
-        if [ ! -z "$SSH_TTY" ]; then # We logged in via SSH
-            tmux attach;
-        fi
+    if [ -z "$TMUX" ] && [ $TERM != 'screen' ]; then # we're not in a tmux session
+        tmux attach;
     fi
 }
 
