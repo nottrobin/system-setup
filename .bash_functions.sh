@@ -235,6 +235,13 @@ function load_screen_session()
     fi
 }
 
+function hub_alias()
+{
+    if type "hub" &> /dev/null; then
+        eval "$(hub alias -s)"
+    fi
+}
+
 function remotediff()
 {
     if [[ $3 ]]; then
