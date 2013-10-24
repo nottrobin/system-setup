@@ -13,7 +13,7 @@ set_bash_completion         # Make sure tab completion is turned on
 set_path                    # Add my custom locations to $PATH
 set_svn_path                # Add the SVNPATH
 set_aliases                 # Add custom aliases
-set_terminal_prompt_colours # Setup prompt colours
+prompt_standard             # Setup prompt colours
 enable_ssh_auto_login       # Load ssh-agent for SSH logins
 load_tmux_session           # start tmux
 hub_alias                   # If "hub" is installed, alias it to "git"
