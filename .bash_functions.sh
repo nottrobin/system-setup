@@ -319,3 +319,12 @@ function sctc() {
     fi
     echo "Done."
 }
+
+# virtual env config
+function virtualenvwrapperconfig() {
+    if [ $(which virtualenv) ]; then
+        export WORKON_HOME=$HOME/.virtualenvs
+        export PROJECT_HOME=$HOME/projects
+        source /usr/local/bin/virtualenvwrapper.sh
+    fi
+}

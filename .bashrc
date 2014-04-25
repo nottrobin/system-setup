@@ -16,3 +16,4 @@ set_aliases                 # Add custom aliases
 prompt_standard             # Setup prompt colours
 load_tmux_session           # start tmux
 hub_alias                   # If "hub" is installed, alias it to "git"
+virtualenvwrapperconfig     # Setup python's virtualenvwrapper config
