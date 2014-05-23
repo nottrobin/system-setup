@@ -81,8 +81,8 @@ function define_bash_colors ()
     # Calculate host colour
     host_sha=`hostname | sha1sum | awk '{print substr($0, 1, 10)}'`
     host_sha_binary=$((0x$host_sha))
-    let "host_hue=$host_sha_binary % 7"
-    host_colour="\[\033[01;3"$host_hue"m\]"
+    let "host_hue=($host_sha_binary + 3) % 7"
+    host_color="\[\033[01;3"$host_hue"m\]"
 }
 
 # Setup a bunch of aliases
@@ -175,7 +175,7 @@ function prompt_standard ()
     # $REALNAME = environment name (e.g. inspire-qa-web-01)
     # \W = working directory
 
-    PS1="$delimiter_color[$host_colour\u@\h$delimiter_color:$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] # $command_color"
+    PS1="$delimiter_color[$host_color\u@\h$delimiter_color:$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] # $command_color"
 }
 
 # Add some useful locations to the $PATH
