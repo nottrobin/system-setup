@@ -82,8 +82,7 @@ function define_bash_colors ()
     host_sha=`hostname | sha1sum | awk '{print substr($0, 1, 10)}'`
     host_sha_binary=$((0x$host_sha))
     let "host_hue=$host_sha_binary % 7"
-    let "host_bold=$host_sha_binary % 2"
-    host_colour="\[\033[0"$host_bold";3"$host_hue"m\]"
+    host_colour="\[\033[01;3"$host_hue"m\]"
 }
 
 # Setup a bunch of aliases
