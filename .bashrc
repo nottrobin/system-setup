@@ -4,7 +4,8 @@
 
 # Load in some useful bash functions
 ##
-source `dirname ${BASH_SOURCE[0]}`/.bash_functions.sh;
+source `dirname ${BASH_SOURCE[0]}`/.git-prompt.sh
+source `dirname ${BASH_SOURCE[0]}`/.bash_functions.sh
 
 # Run some bash functions
 ##
