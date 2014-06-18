@@ -58,33 +58,6 @@ function source_global_bashrc ()
     fi
 }
 
-# Define a bunch of colour variables 
-##
-function define_bash_colors ()
-{
-    # basic colours
-    red="\[\033[00;31m\]"
-    green="\[\033[00;32m\]"
-    yellow="\[\033[00;33m\]"
-    blue="\[\033[00;34m\]"
-    magenta="\[\033[00;35m\]"
-    white="\[\033[00;37m\]"
-
-    # bright colours
-    h_red="\[\033[01;31m\]"
-    h_green="\[\033[01;32m\]"
-    h_yellow="\[\033[01;33m\]"
-    h_blue="\[\033[01;34m\]"
-    h_magenta="\[\033[01;35m\]"
-    h_white="\[\033[01;37m\]"
-
-    # Calculate host colour
-    host_sha=`hostname | sha1sum | awk '{print substr($0, 1, 10)}'`
-    host_sha_binary=$((0x$host_sha))
-    let "host_hue=($host_sha_binary + 3) % 7"
-    host_color="\[\033[01;3"$host_hue"m\]"
-}
-
 # Setup a bunch of aliases
 ##
 function set_aliases ()
@@ -130,27 +103,56 @@ function set_aliases ()
     alias up='git push && git push heroku'
 }
 
+# Define a bunch of colour variables 
+##
+function define_bash_colors ()
+{
+    # basic colours
+    red="\[\033[00;31m\]"
+    green="\[\033[00;32m\]"
+    yellow="\[\033[00;33m\]"
+    blue="\[\033[00;34m\]"
+    magenta="\[\033[00;35m\]"
+    white="\[\033[00;37m\]"
+
+    # bright colours
+    h_red="\[\033[01;31m\]"
+    h_green="\[\033[01;32m\]"
+    h_yellow="\[\033[01;33m\]"
+    h_blue="\[\033[01;34m\]"
+    h_magenta="\[\033[01;35m\]"
+    h_white="\[\033[01;37m\]"
+}
+
 # Prompt colours
 ##
-function prompt_colours ()
+function prompt_settings ()
 {
     define_bash_colors # Import easy color variable names
 
     delimiter_color=$h_white
-    environment_color=$h_green
     path_color=$h_blue
     command_color=$white
     branch_color=$green
 
+    terminus=$ # The character to end with
+
+    # Calculate host colour
+    host_sha=`hostname | sha1sum | awk '{print substr($0, 1, 10)}'`
+    host_sha_binary=$((0x$host_sha))
+    let "host_hue=($host_sha_binary + 3) % 7"
+    host_color="\[\033[01;3"$host_hue"m\]"
+
     # Wherever we are, root is red
-    [[ `whoami` == 'root' ]] && environment_color=$h_red;
+    [[ `whoami` == 'root' ]] && host_color=$h_red
+    [[ `whoami` == 'root' ]] && terminus=#
 }
 
 # Make the prompt shorter
 ##
 function prompt_short ()
 {
-    prompt_colours # Get prompt colour choices
+    prompt_settings # Get prompt colour choices
 
     # The following string defines what is displayed on the terminal prompt
     # Colours variables will set the colour for all characters after that point until a new colour is specified
@@ -159,14 +161,14 @@ function prompt_short ()
     # $REALNAME = environment name (e.g. inspire-qa-web-01)
     # \W = working directory
 
-    PS1="$delimiter_color[$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] # $command_color"
+    PS1="$delimiter_color[$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] $terminus $command_color"
 }
 
 # Terminal prompt colours
 ##
 function prompt_standard ()
 {
-    prompt_colours # Get prompt colour choices
+    prompt_settings # Get prompt colour choices
 
     # The following string defines what is displayed on the terminal prompt
     # Colours variables will set the colour for all characters after that point until a new colour is specified
@@ -175,7 +177,7 @@ function prompt_standard ()
     # $REALNAME = environment name (e.g. inspire-qa-web-01)
     # \W = working directory
 
-    PS1="$delimiter_color[$host_color\u@\h$delimiter_color:$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] # $command_color"
+    PS1="$delimiter_color[$host_color\u@\h$delimiter_color:$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] $terminus $command_color"
 }
 
 # Add some useful locations to the $PATH
