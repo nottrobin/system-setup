@@ -15,9 +15,11 @@
     conflicts = diff --name-only --diff-filter=U
     publish = !sh -c \"git add $1 && git mv $1 \\`echo \\\"$1\\\" | sed \\\"s/^_posts[/]\\(.*\\)/_posts\\/\\\"`date +%Y-%m-%d`\\\"-\\1/\\\"\\`\" -
     co = checkout
+    amend = commit --amend --no-edit
+    amend-at-commit = !~/bin/git-amend-at-commit.sh
 [color]
     ui = true
 [push]
-	default = current
+	default = simple
 [pull]
-	default = current
+	default = simple
