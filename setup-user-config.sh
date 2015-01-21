@@ -86,3 +86,5 @@ done
 # Setup global git config (needs special name)
 installfile '.globalgitconfig' '.gitconfig' && echo " - == Installed .gitconfig";
 
+# sublime settings
+ln -s ${projectdir}/.user-preferences.sublime-settings ${HOME}/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
