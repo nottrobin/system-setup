@@ -1,8 +1,11 @@
-Shell config
+System setup
 ===
 
-This is my shell config, including:
+These are files to setup my Ubuntu system, including:
 
+- setup-system.sh - Prompt to install software and install system-wide and user config
+- setup-user-config.sh - Link user config files from this directory
+- remove-user-config.sh - Unlink user config files from this directory
 - .bash_functions.sh - a collection of useful functions for setting up my bash shell
 - .bashrc - setup the bash shell, by loading some of the bash functions
 - .vim - my vim setup - including syntax highlighting and other tweaks
@@ -13,25 +16,22 @@ This is my shell config, including:
 Usage
 ---
 
-To install:
+### Setup a new system
 
-```
-git clone git@github.com:nottrobin/.shellconfig.git
-.shellconfig/install.sh # creates symlinks in your home directory
-```
-
-Your existing files will be backed up in .shellconfig/replaced
-
-To uninstall - and move your original files back into your home directory:
-
-```
-.shellconfig/uninstall.sh
+``` bash
+./setup-system.sh  # 
 ```
 
-If you get an error trying to clone:
+### Just link the user config files
 
-- Make sure you're using the read-only URL: `git://github.com/nottrobin/.shellconfig.git`.
-- You might be getting a [certificate problem](http://stackoverflow.com/questions/3777075/https-github-access/4454754#comment-11700318). Try `env GIT_SSL_NO_VERIFY=true`.
+``` bash
+./setup-user-config.sh  # links config files from this directory
+```
 
-Once you've installed my config, the .globalgitconfig contains a fix to the certificate problem, using `http.sslVerify=no`.
+Your existing files will be backed up in ./replaced
 
+### Unlink the user config files
+
+```
+./remove-user-config.sh
+```

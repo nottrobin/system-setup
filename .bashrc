@@ -14,6 +14,8 @@ set_bash_completion         # Make sure tab completion is turned on
 set_path                    # Add my custom locations to $PATH
 set_svn_path                # Add the SVNPATH
 set_aliases                 # Add custom aliases
+start_byobu                 # Run byobu whenever a terminal is created
 prompt_standard             # Setup prompt colours
 hub_alias                   # If "hub" is installed, alias it to "git"
 virtualenvwrapperconfig     # Setup python's virtualenvwrapper config
+

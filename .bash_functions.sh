@@ -335,3 +335,11 @@ function virtualenvwrapperconfig() {
         source /usr/local/bin/virtualenvwrapper.sh
     fi
 }
+
+# Start byobu
+function start_byobu() {
+    if [ -f /usr/bin/byobu-launch ]; then
+        _byobu_sourced=1 . /usr/bin/byobu-launch
+    fi
+}
+
