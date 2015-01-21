@@ -1,20 +1,12 @@
 set -e
 
-scriptpath=$(readlink -f $0);
-projectdir=`dirname "$scriptpath"`
-
 # Add a new apt config setting
 # to make it always install package dependencies
 # without prompting "are you sure?"
 function apt_always_yes() {
-    if [ ! -d $projectdir ]; then
-        echo "can't get current directory"
-        return;
-    fi
-
     if [ -d /etc/apt/apt.conf.d ] && [ ! -e /etc/apt/apt.conf.d/97always-yes ]; then
-        echo "~ Linking apt config file 97always-yes"
-        sudo ln -s ${projectdir}/.apt-always-yes.conf /etc/apt/apt.conf.d/97always-yes
+        echo 'APT::Get::Assume-Yes "true";' | sudo tee /etc/apt/apt.conf.d/97always-yes
+        echo 'APT::Get::force-yes "true";' | sudo tee -a /etc/apt/apt.conf.d/97always-yes
     fi
 }
 
@@ -63,13 +55,22 @@ function setup_ssh_key() {
         cat ${HOME}/.ssh/id_rsa.pub
         echo -e "\nPlease copy it into:"
         echo -e "- Github (https://github.com/settings/ssh)"
-        echo -e "- Launchpad (https://launchpad.net/~nottrobin/+editsshkeys)"
+        echo -e "- Launchpad (e.g.: https://launchpad.net/~nottrobin/+editsshkeys)"
     fi
 }
 
 # Run our setup-config script to setup the user's shell config
 function setup_user_config() {
-    ./setup-user-config.sh
+    if [ -f setup-user-config ]; then
+        ./setup-user-config.sh
+    else
+        if [ ! -d ${HOME}/system-setup ]; then
+            echo "Cloning the system setup repository into "${HOME}"/system-setup"
+            git clone https://github.com/nottrobin/system-setup.git ${HOME}/system-setup
+        fi
+
+        ${HOME}/system-setup/setup-user-config.sh
+    fi
 }
 
 run_functions="apt_always_yes install_chrome install_sublime_3 install_apt_packages setup_user_config setup_ssh_key"
