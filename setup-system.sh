@@ -34,6 +34,9 @@ function install_sublime_3() {
 function install_apt_packages() {
     install_packages="git python-dev vim byobu ack-grep bzr curl"
 
+    # Always update apt first
+    sudo apt update
+
     for package in ${install_packages}; do
         while true; do
             read -p "Install "${package}"? [Y/n] " install
