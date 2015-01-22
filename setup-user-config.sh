@@ -91,3 +91,5 @@ if [ -d $installdir/.config/sublime-text-3/Packages ]; then
     mkdir -p $installdir/.config/sublime-text-3/Packages/User
     installfile '.user-preferences.sublime-settings' '.config/sublime-text-3/Packages/User/Preferences.sublime-settings' && echo " - == Installed sublime user settings";
 fi
+
+echo "~~ Setting applied. Restart your terminal to see the changes. ~~"
