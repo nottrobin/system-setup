@@ -49,17 +49,22 @@ function install_apt_packages() {
     possible_packages="git python-dev vim byobu ack-grep bzr curl"
     packages_to_install=""
 
-    update_apt  # update apt first
-
+    echo "~ Choose which packages to install:"
     for package in ${possible_packages}; do
         while true; do
             read -p "Install "${package}"? [Y/n] " install
             case $install in
                 [Nn]* ) break;;
-                * ) sudo apt install ${package}; break;;
+                * ) packages_to_install=${packages_to_install}" "${package}; break;;
             esac
         done
     done
+
+    if [ -n "${packages_to_install}" ]; then
+        echo "~ Installing chosen packages: "${packages_to_install}
+        update_apt  # update apt first
+        sudo apt install ${packages_to_install}
+    fi
 }
 
 # Generate a new SSH key, to be copied into Github (at the very least)
