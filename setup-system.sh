@@ -64,19 +64,19 @@ function setup_ssh_key() {
 function setup_user_config() {
     if [ -f setup-user-config ]; then
         ./setup-user-config.sh
+    elif [ -d ${HOME}/system-setup ]; then
+        ${HOME}/system-setup/setup-user-config.sh;
     else
-        if [ ! -d ${HOME}/system-setup ]; then
-            while true; do
-                read -p "Clone the system setup repository into ~/system-setup ? [Y/n] " clone_it
-                case $clone_it in
-                    [Nn]* ) break;;
-                    * ) git clone git@github.com:nottrobin/system-setup.git ${HOME}/system-setup \
-                        || git clone https://github.com/nottrobin/system-setup.git ${HOME}/system-setup;
-                        ${HOME}/system-setup/setup-user-config.sh;
-                        break;;
-                esac
-            done
-        fi
+        while true; do
+            read -p "Clone the system setup repository into ~/system-setup ? [Y/n] " clone_it
+            case $clone_it in
+                [Nn]* ) break;;
+                * ) git clone git@github.com:nottrobin/system-setup.git ${HOME}/system-setup \
+                    || git clone https://github.com/nottrobin/system-setup.git ${HOME}/system-setup;
+                    ${HOME}/system-setup/setup-user-config.sh;
+                    break;;
+            esac
+        done
     fi
 }
 
