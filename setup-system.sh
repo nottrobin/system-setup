@@ -5,6 +5,7 @@ set -e
 # without prompting "are you sure?"
 function apt_always_yes() {
     if [ -d /etc/apt/apt.conf.d ] && [ ! -e /etc/apt/apt.conf.d/97always-yes ]; then
+        echo "~ Creating /etc/apt/apt.conf.d/97always-yes"
         echo 'APT::Get::Assume-Yes "true";' | sudo tee /etc/apt/apt.conf.d/97always-yes
         echo 'APT::Get::force-yes "true";' | sudo tee -a /etc/apt/apt.conf.d/97always-yes
     fi
@@ -65,11 +66,14 @@ function setup_user_config() {
         ./setup-user-config.sh
     else
         if [ ! -d ${HOME}/system-setup ]; then
-            echo "Cloning the system setup repository into "${HOME}"/system-setup"
-            git clone https://github.com/nottrobin/system-setup.git ${HOME}/system-setup
+            while true; do
+                read -p "Clone the system setup repository into ~/system-setup ? [Y/n] " clone_it
+                case $clone_it in
+                    [Nn]* ) break;;
+                    * ) git clone https://github.com/nottrobin/system-setup.git ${HOME}/system-setup; ${HOME}/system-setup/setup-user-config.sh; break;;
+                esac
+            done
         fi
-
-        ${HOME}/system-setup/setup-user-config.sh
     fi
 }
 
