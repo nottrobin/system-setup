@@ -80,7 +80,7 @@ function setup_user_config() {
     fi
 }
 
-run_functions="apt_always_yes install_chrome install_sublime_3 install_apt_packages setup_user_config setup_ssh_key"
+run_functions="apt_always_yes install_chrome install_sublime_3 install_apt_packages setup_ssh_key setup_user_config"
 
 for function_name in ${run_functions}; do
     while true; do
