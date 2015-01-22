@@ -32,7 +32,7 @@ function install_sublime_3() {
 # Install apt packages in the list
 # Prompting each time 
 function install_apt_packages() {
-    install_packages="git python-dev vim byobu ack-grep"
+    install_packages="git python-dev vim byobu ack-grep bzr"
 
     for package in ${install_packages}; do
         while true; do
