@@ -74,7 +74,7 @@ installfile()
 }
 
 # Setup normal files
-for filename in '.tmux.conf' '.vim'; do
+for filename in '.tmux.conf' '.vim' '.bazaar'; do
     installfile $filename && echo " - == Installed $filename";
 done
 
