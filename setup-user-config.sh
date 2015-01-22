@@ -79,7 +79,7 @@ for filename in '.tmux.conf' '.vim' '.bazaar'; do
 done
 
 # Source bash files
-for filename in '.bashrc' '.bash_profile'; do
+for filename in '.bashrc'; do
     installfile $filename $filename true && echo " - == Installed $filename";
 done
 
