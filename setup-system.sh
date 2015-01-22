@@ -67,6 +67,17 @@ function install_apt_packages() {
     fi
 }
 
+# Hub is a great way to manage git with github
+function install_github_hub() {
+    latest=$(curl -s https://api.github.com/repos/github/hub/releases | grep browser_download_url | head -n 1 | cut -d '"' -f 4)
+    echo "~ Downloading hub latest tarball"
+    sudo wget -O /tmp/hub.tgz ${latest}
+    echo "~ Extracting hub stuff"
+    sudo tar -xzf /tmp/hub.tgz -C /tmp
+    echo "~ Copying binaries into /usr/local/bin"
+    sudo cp -r /tmp/hub_*/* /usr/local/bin
+}
+
 # Generate a new SSH key, to be copied into Github (at the very least)
 function setup_ssh_key() {
     if [ ! -f ${HOME}/.ssh/id_rsa.pub ]; then
@@ -102,7 +113,7 @@ function setup_user_config() {
     fi
 }
 
-run_functions="apt_always_yes install_chrome install_sublime_3 install_apt_packages setup_ssh_key setup_user_config"
+run_functions="apt_always_yes install_chrome install_sublime_3 install_apt_packages install_github_hub setup_ssh_key setup_user_config"
 
 for function_name in ${run_functions}; do
     while true; do
