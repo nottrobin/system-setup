@@ -56,10 +56,8 @@ done
 # Setup global git config (needs special name)
 uninstallfile '.globalgitconfig' '.gitconfig' && echo " - == Uninstalled .gitconfig";
 
-# Remove sublime symlink
-if [ -L ${HOME}/.config/sublime-text-3/Packages/User/Preferences.sublime-settings ]; then
-    rm ${HOME}/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
-fi
+# Setup global git config (needs special name)
+uninstallfile '.user-preferences.sublime-settings' '.config/sublime-text-3/Packages/User/Preferences.sublime-settings' && echo " - == Uninstalled sublime user profile";
 
 # Try to remove backup directory (should now be empty)
 [ -e $backupdir ] && rmdir $backupdir && echo " - Removed backup directory";
