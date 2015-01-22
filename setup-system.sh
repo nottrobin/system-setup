@@ -1,5 +1,17 @@
 set -e
 
+# Update apt only if the list is more than an hour old
+function update_apt() {
+    now=$(date +%s)
+    an_hour_ago=$(expr ${now} - 3600)
+    apt_last_updated=$(stat -c '%Y' /var/lib/apt/lists)
+
+    if [ ${an_hour_ago} -gt ${apt_last_updated} ]; then
+        echo "~ Updating apt"
+        sudo apt update
+    fi
+}
+
 # Add a new apt config setting
 # to make it always install package dependencies
 # without prompting "are you sure?"
@@ -14,6 +26,8 @@ function apt_always_yes() {
 # Download and install Google Chrome, as best we know how
 function install_chrome() {
     echo "~ Installing Google Chrome's dependencies"
+
+    update_apt  # Update apt first
     sudo apt install libxss1 libappindicator1 libindicator7
     echo "~ Downloading google chrome .deb package"
     sudo wget -P /tmp https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -32,12 +46,12 @@ function install_sublime_3() {
 # Install apt packages in the list
 # Prompting each time 
 function install_apt_packages() {
-    install_packages="git python-dev vim byobu ack-grep bzr curl"
+    possible_packages="git python-dev vim byobu ack-grep bzr curl"
+    packages_to_install=""
 
-    # Always update apt first
-    sudo apt update
+    update_apt  # update apt first
 
-    for package in ${install_packages}; do
+    for package in ${possible_packages}; do
         while true; do
             read -p "Install "${package}"? [Y/n] " install
             case $install in
