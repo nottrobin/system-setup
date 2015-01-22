@@ -55,7 +55,13 @@ installfile()
 
     # If we're to source it
     elif [ -e $installname ] && [ $source ]; then
-        echo "source $localname; #nottrobin-shellconfig" >> $installname && echo " - Sourced from .shellconfig";
+        source_line="source $localname; #nottrobin-shellconfig"
+
+        if ! grep -q "${source_line}" $installname; then
+            echo ${source_line} >> $installname && echo " - Sourced from .shellconfig";
+        else
+            echo " - Already sourced"
+        fi
 
     # Exists but not sourceable
     elif [ -e $installname ]; then
