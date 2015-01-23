@@ -69,13 +69,21 @@ function install_apt_packages() {
 
 # Hub is a great way to manage git with github
 function install_github_hub() {
-    latest=$(curl -s https://api.github.com/repos/github/hub/releases | grep browser_download_url | head -n 1 | cut -d '"' -f 4)
-    echo "~ Downloading hub latest tarball"
-    sudo wget -O /tmp/hub.tgz ${latest}
-    echo "~ Extracting hub stuff"
-    sudo tar -xzf /tmp/hub.tgz -C /tmp
-    echo "~ Copying binaries into /usr/local/bin"
-    sudo cp -r /tmp/hub_*/* /usr/local/bin
+    while true; do
+        read -p "Install rake (required)? [Y/n] " install
+        case $install in
+            [Nn]* ) exit;;
+            * ) update_apt;
+                sudo apt install rake;
+                break;;
+        esac
+    done
+    echo "~ Cloning git://github.com/github/hub.git"
+    sudo git clone git://github.com/github/hub.git -b 1.12-stable /tmp/hub
+    echo "~ Installing hub"
+    cd /tmp/hub
+    sudo rake install PREFIX=/usr/local
+    cd -
 }
 
 # Generate a new SSH key, to be copied into Github (at the very least)
