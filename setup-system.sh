@@ -46,7 +46,7 @@ function install_sublime_3() {
 # Install apt packages in the list
 # Prompting each time 
 function install_apt_packages() {
-    possible_packages="git python-dev python-pip vim byobu ack-grep bzr curl"
+    possible_packages="git python-pip vim byobu ack-grep bzr curl"
     packages_to_install=""
 
     echo "~ Choose which packages to install:"
