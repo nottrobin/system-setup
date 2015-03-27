@@ -18,4 +18,4 @@ start_byobu                 # Run byobu whenever a terminal is created
 prompt_standard             # Setup prompt colours
 hub_alias                   # If "hub" is installed, alias it to "git"
 virtualenvwrapperconfig     # Setup python's virtualenvwrapper config
-
+preserve_history            # Concatenate history across multiple terminal windows
