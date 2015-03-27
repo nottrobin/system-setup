@@ -195,7 +195,7 @@ function home_prompt_standard ()
     prompt_settings # Get prompt colour choices
 
     # For home machine, host_colour should always be green
-    host_color=$h_green
+    [[ `whoami` != 'root' ]] && host_color=$h_green
 
     PS1="$delimiter_color[$host_color\u@\h$delimiter_color:$path_color\W\$(__git_ps1 \"$delimiter_color|$branch_color%s\")$delimiter_color] $terminus $command_color"
 }
