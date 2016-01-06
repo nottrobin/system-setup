@@ -113,6 +113,7 @@ function define_bash_colors ()
     yellow="\[\033[00;33m\]"
     blue="\[\033[00;34m\]"
     magenta="\[\033[00;35m\]"
+    turquoise="\[\033[00;36m\]"
     white="\[\033[00;37m\]"
 
     # bright colours
@@ -121,6 +122,7 @@ function define_bash_colors ()
     h_yellow="\[\033[01;33m\]"
     h_blue="\[\033[01;34m\]"
     h_magenta="\[\033[01;35m\]"
+    h_turquoise="\[\033[01;36m\]"
     h_white="\[\033[01;37m\]"
 }
 
@@ -169,6 +171,12 @@ function prompt_short ()
 function prompt_standard ()
 {
     prompt_settings # Get prompt colour choices
+
+    # Allow custom colour
+    [ -n "${1}" ] && host_color=${!1}
+
+    # Set root colour
+    [ `whoami` == 'root' ] && host_color=$h_red
 
     # The following string defines what is displayed on the terminal prompt
     # Colours variables will set the colour for all characters after that point until a new colour is specified
