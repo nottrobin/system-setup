@@ -46,7 +46,7 @@ function install_sublime_3() {
 # Download and install atom as best we know how
 function install_atom() {
     echo "~ Downloading atom deb package"
-    sudo wget -P /tmp https://atom-installer.github.com/v1.5.3/atom-amd64.deb
+    wget -O /tmp/atom.deb https://atom.io/download/deb
     echo "~ Installing downloaded package"
     sudo dpkg -i /tmp/atom-amd64.deb
 }
