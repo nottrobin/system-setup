@@ -48,7 +48,7 @@ function install_atom() {
     echo "~ Downloading atom deb package"
     wget -O /tmp/atom.deb https://atom.io/download/deb
     echo "~ Installing downloaded package"
-    sudo dpkg -i /tmp/atom-amd64.deb
+    sudo dpkg -i /tmp/atom.deb
 }
 
 # Install apt packages in the list
