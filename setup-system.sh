@@ -43,8 +43,16 @@ function install_sublime_3() {
     sudo dpkg -i /tmp/sublime-text_build-3065_amd64.deb
 }
 
+# Download and install atom as best we know how
+function install_atom() {
+    echo "~ Downloading atom deb package"
+    wget -O /tmp/atom.deb https://atom.io/download/deb
+    echo "~ Installing downloaded package"
+    sudo dpkg -i /tmp/atom-amd64.deb
+}
+
 # Install apt packages in the list
-# Prompting each time 
+# Prompting each time
 function install_apt_packages() {
     possible_packages="git python-pip vim byobu ack-grep bzr curl"
     packages_to_install=""
@@ -121,7 +129,7 @@ function setup_user_config() {
     fi
 }
 
-run_functions="apt_always_yes install_chrome install_sublime_3 install_apt_packages install_github_hub setup_ssh_key setup_user_config"
+run_functions="apt_always_yes install_chrome install_sublime_3 install_atom install_apt_packages install_github_hub setup_ssh_key setup_user_config"
 
 for function_name in ${run_functions}; do
     while true; do
