@@ -346,7 +346,7 @@ function virtualenvwrapperconfig() {
 
 # Start byobu
 function start_byobu() {
-    if [ -f /usr/bin/byobu-launch ]; then
+    if [ -f /usr/bin/byobu-launch ] && [ -z "${TMUX}" ]; then
         _byobu_sourced=1 . /usr/bin/byobu-launch
     fi
 }
