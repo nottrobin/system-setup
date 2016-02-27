@@ -5,7 +5,6 @@
     sslVerify = no
 [core]
     autocrlf = false
-    editor = "subl -n -w"
 [alias]
     s = status -sb
     subtree = subtree.sh
