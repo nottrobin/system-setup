@@ -19,7 +19,6 @@ function apt_always_yes() {
     if [ -d /etc/apt/apt.conf.d ] && [ ! -e /etc/apt/apt.conf.d/97always-yes ]; then
         echo "~ Creating /etc/apt/apt.conf.d/97always-yes"
         echo 'APT::Get::Assume-Yes "true";' | sudo tee /etc/apt/apt.conf.d/97always-yes
-        echo 'APT::Get::force-yes "true";' | sudo tee -a /etc/apt/apt.conf.d/97always-yes
     fi
 }
 
