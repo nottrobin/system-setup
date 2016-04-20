@@ -50,6 +50,14 @@ function install_atom() {
     sudo dpkg -i /tmp/atom.deb
 }
 
+# Download and install oh my zsh
+function install_oh_my_zsh() {
+    echo "~ Installing zsh package"
+    sudo apt install zsh
+    echo "~ Downloading and install oh my zsh"
+    sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+}
+
 # Install apt packages in the list
 # Prompting each time
 function install_apt_packages() {
@@ -128,7 +136,7 @@ function setup_user_config() {
     fi
 }
 
-run_functions="apt_always_yes install_chrome install_sublime_3 install_atom install_apt_packages install_github_hub setup_ssh_key setup_user_config"
+run_functions="apt_always_yes install_chrome install_sublime_3 install_atom install_apt_packages install_github_hub setup_ssh_key setup_user_config install_oh_my_zsh"
 
 for function_name in ${run_functions}; do
     while true; do
