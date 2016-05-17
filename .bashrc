@@ -25,3 +25,6 @@ preserve_history            # Concatenate history across multiple terminal windo
 # From Dustin Kirkland (author): http://askubuntu.com/a/296434
 #start_byobu                 # Run byobu whenever a terminal is created
 
+# Make vim default editor
+export VISUAL=vim
+
